@@ -1,0 +1,109 @@
+.root {
+  --intro-duration: 1800ms;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(28px, 6vw, 64px) 24px;
+  background: #101213;
+  color: #f0f1ec;
+  pointer-events: none;
+  animation: exit var(--intro-duration) ease forwards;
+}
+
+.caption {
+  color: #979e9e;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.brand {
+  width: min(100%, 480px);
+  text-align: center;
+}
+
+.wordmark {
+  display: block;
+  font-size: clamp(48px, 12vw, 88px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.065em;
+  animation: enter 650ms ease-out both;
+}
+
+.wordmark > span {
+  display: block;
+  margin-top: 14px;
+  padding-left: 0.48em;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.48em;
+}
+
+.lights {
+  display: flex;
+  justify-content: space-between;
+  gap: 56px;
+  margin: 44px auto 32px;
+  width: 80%;
+}
+
+.lights > span {
+  height: 2px;
+  flex: 1;
+  background: #e2f5ee;
+  box-shadow: 0 0 14px 2px #b8e5d540;
+  transform-origin: right;
+  animation: lights 850ms 150ms ease-out both;
+}
+
+.lights > span + span {
+  transform-origin: left;
+}
+
+.content {
+  animation: reveal var(--intro-duration) ease both;
+}
+
+
+@keyframes enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes lights {
+  from { opacity: 0; transform: scaleX(0.15); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+@keyframes exit {
+  0%, 72% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+@keyframes reveal {
+  0%, 72% { opacity: 0; visibility: hidden; }
+  73% { opacity: 0; visibility: visible; }
+  100% { opacity: 1; visibility: visible; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay {
+    display: none;
+  }
+
+  .overlay,
+  .wordmark,
+  .lights > span,
+  .content {
+    animation: none;
+  }
+}

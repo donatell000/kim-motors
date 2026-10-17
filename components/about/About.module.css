@@ -1,0 +1,73 @@
+.section {
+  padding: clamp(48px, 5vw, 96px) clamp(20px, 5.2vw, 100px);
+  background: #0e0d12;
+  color: #fff;
+  overflow-x: clip;
+  scroll-snap-align: start;
+}
+
+.inner { position: relative; display: grid; grid-template-columns: 1.1fr 1fr; max-width: 1720px; margin: 0 auto; }
+.copy { position: relative; z-index: 2; }
+.audi { position: absolute; top: -3%; left: 0; width: 54%; height: auto; transform: scaleX(-1); pointer-events: none; }
+.title { margin: 0 0 32px; font-size: clamp(64px, 7.8vw, 150px); font-weight: 900; line-height: 1; letter-spacing: -0.055em; text-transform: uppercase; }
+.experience { max-width: 49.37%; margin: 0 0 20px; padding: 24px 28px; background: #fff; color: #0e0d12; font-size: clamp(22px, 2.1vw, 40px); font-weight: 300; line-height: 1.1; text-wrap: pretty; }
+.experience strong { font-weight: 700; }
+.mission { padding: clamp(24px, 2.5vw, 48px); background: #ff0009; }
+.mission h3 { margin: 0; font-size: inherit; font-weight: 700; }
+.mission { font-size: clamp(20px, 2.1vw, 36px); font-weight: 300; line-height: 1.2; }
+.mission p { margin: 0; text-wrap: pretty; }
+.mission p + p { margin-top: 0; }
+.portrait { position: relative; min-width: 0; margin: 0; align-self: stretch; }
+.car { position: absolute; width: 150%; max-width: none; height: auto; right: -42%; bottom: -4%; }
+.founder { position: absolute; right: 6%; bottom: 0; width: 88%; height: 100%; object-fit: cover; object-position: top; }
+.caption { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); width: max-content; max-width: 100%; padding: 16px 24px; background: #0e0d12; text-align: center; line-height: 1.45; }
+.caption strong, .caption span { display: block; }
+.caption strong { font-size: 20px; }
+.caption span { color: #c9c9c9; font-size: 18px; }
+.story { position: relative; z-index: 2; max-width: 780px; margin: 40px 0 0; color: #afafaf; }
+.story blockquote { margin: 0; font-style: italic; font-weight: 300; }
+.story p { margin: 0; font-size: clamp(20px, 2.1vw, 34px); line-height: 1.25; text-wrap: pretty; }
+.story figcaption { margin-top: 16px; text-align: right; font-size: 16px; }
+
+@media (max-width: 900px) {
+  .section { padding: 56px max(20px, env(safe-area-inset-right)) 64px max(20px, env(safe-area-inset-left)); }
+  .inner { grid-template-columns: minmax(0, 1fr); }
+  .copy { display: contents; }
+  .audi { top: 90px; width: 100%; }
+  .title, .experience, .mission { position: relative; z-index: 2; }
+  .title { grid-row: 1; font-size: clamp(48px, 11vw, 88px); margin-bottom: 24px; }
+  .experience { grid-row: 2; max-width: none; padding: 24px; margin: 0; font-size: clamp(22px, 4vw, 30px); }
+  .portrait { grid-row: 3; width: 100%; height: clamp(340px, 85vw, 540px); margin-top: 24px; }
+  .founder { width: 100%; max-width: 450px; left: 50%; right: auto; transform: translateX(-50%); object-fit: cover; }
+  .car { width: 100%; right: 0; bottom: 12px; }
+  .caption { bottom: 16px; padding: 12px 20px; }
+  .caption strong { font-size: 18px; }
+  .caption span { font-size: 16px; }
+  .mission { grid-row: 4; padding: 24px; font-size: 22px; }
+  .story { grid-row: 5; margin-top: 32px; padding-left: 20px; border-left: 2px solid #ff0009; }
+  .story p { font-size: 20px; }
+}
+
+@media (min-width: 901px) and (min-height: 601px) {
+  .section { height: 100svh; padding-block: 5svh; display: flex; align-items: center; }
+  .inner { width: 100%; max-width: min(1720px, 180svh); column-gap: 3vw; }
+  .title { font-size: min(7.8vw, 11svh); margin-bottom: 2.5svh; }
+  .experience { max-width: 49.37%; padding: 1.5svh 1.8svh; margin-bottom: 2svh; font-size: min(1.8vw, 2.8svh); }
+  .mission { padding: 3svh; font-size: min(2.1vw, 3svh); }
+  .mission h3 { margin-bottom: 0; }
+  .mission p + p { margin-top: 0; }
+  .portrait { grid-column: 2; grid-row: 1 / 3; }
+  .portrait::after { content: ""; position: absolute; right: 0; bottom: 0; width: 155%; height: 35%; background: linear-gradient(to bottom, transparent, #0e0d12); pointer-events: none; }
+  .founder { width: 100%; right: 0; object-fit: cover; object-position: top; }
+  .car { width: 148%; right: -24%; bottom: 1%; mask-image: linear-gradient(to bottom, #000 65%, transparent 100%); }
+  .caption { z-index: 1; bottom: 27%; padding: 1.5svh 2svh; }
+  .caption strong { font-size: min(20px, 2.5svh); }
+  .caption span { font-size: min(18px, 2.2svh); }
+  .story { margin-top: 3svh; max-width: 780px; }
+  .story p { font-size: min(2.1vw, 2.8svh); }
+  .story figcaption { margin-top: 1svh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inner { transform: none !important; }
+}

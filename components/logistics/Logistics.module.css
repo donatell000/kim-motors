@@ -1,0 +1,157 @@
+.wrapper {
+  background: #000;
+  scroll-snap-align: start;
+}
+
+.footer {
+  max-width: 1040px;
+  min-height: 168px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  color: #a0a0a0;
+  font-size: 14px;
+}
+
+.footer a {
+  padding: 14px 10px;
+  background: #141414;
+  border-radius: 4px;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.section {
+  min-height: 480px;
+  padding: 36px 24px 64px;
+  border-radius: 48px;
+  background: #fff;
+  color: #191919;
+  color-scheme: light;
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-family: Benzin-Bold, Arial Black, sans-serif;
+  font-size: clamp(32px, 5vw, 77px);
+  font-weight: 900;
+  line-height: 0.93;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.description {
+  margin: 28px 0 36px;
+  font-size: clamp(18px, 1.6vw, 24px);
+  line-height: 1.4;
+}
+
+.form {
+  display: flex;
+  gap: 14px;
+  max-width: 656px;
+  margin: 0 auto;
+}
+
+.field {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 0 24px;
+  border-radius: 12px;
+  background: #f0f0f0;
+  color: #7e7e7e;
+}
+
+.field svg {
+  flex-shrink: 0;
+}
+
+.field input {
+  width: 220px;
+  min-width: 0;
+  max-width: 100%;
+  height: 90px;
+  background: transparent;
+  border: 0;
+  color: #191919;
+  font-size: 24px;
+}
+
+.field input::placeholder {
+  color: #7e7e7e;
+  opacity: 1;
+}
+
+.submit {
+  min-height: 90px;
+  padding: 0 38px;
+  border: 0;
+  border-radius: 12px;
+  background: #f32e23;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background: #d9271d;
+}
+
+.wrapper a:focus-visible,
+.field input:focus-visible,
+.submit:focus-visible {
+  outline: 3px solid #717171;
+  outline-offset: 4px;
+}
+
+.status {
+  max-width: 656px;
+  margin: 24px auto 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.status a {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .footer {
+    flex-direction: column;
+    gap: 20px;
+    padding-block: 32px;
+  }
+
+  .section {
+    min-height: 400px;
+    padding: 36px 20px 48px;
+    border-radius: 28px;
+  }
+
+  .form {
+    flex-direction: column;
+  }
+
+  .field {
+    gap: 12px;
+    padding-inline: 16px;
+  }
+
+  .field input {
+    height: 64px;
+    font-size: 18px;
+  }
+
+  .submit {
+    min-height: 60px;
+    font-size: 20px;
+  }
+}
