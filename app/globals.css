@@ -7,83 +7,49 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-html,
-body {
-  margin: 0;
-  height: 100%;
-  overflow-x: clip;
-}
-
-.snap-container {
-  height: 100svh;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  scroll-snap-type: y proximity;
+html {
+  /* Плавная прокрутка только для переходов по ссылкам меню (#about и т.д.). */
   scroll-behavior: smooth;
 }
 
-.snap-section {
-  min-height: 100svh;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
-  padding: 0 clamp(24px, 7vw, 112px);
-  border-top: 1px solid #2a302c;
-}
-
-.snap-section:first-child {
-  border-top: none;
-}
-
-.snap-eyebrow {
-  color: #bfd6ca;
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+html,
+body {
   margin: 0;
+  overflow-x: clip;
 }
 
-.snap-section > h2 {
-  margin: 0;
-  font-size: clamp(32px, 6vw, 72px);
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.045em;
-  max-width: 900px;
-}
-
-.snap-description {
-  max-width: 460px;
-  color: #a5adaa;
-  font-size: 15px;
-  line-height: 1.7;
-  margin: 0;
-}
-
-@media (max-width: 900px), (max-height: 600px) {
-  .snap-container {
-    height: auto;
-    overflow: visible;
-    scroll-snap-type: none;
-    scroll-behavior: auto;
-  }
-
-  .snap-section { padding-block: 48px; }
-}
-
-/* Скролл может занимать весь путь мгновенно, если пользователь
-   предпочитает уменьшенное движение — не навязываем плавную
-   прокрутку и не фиксируем каждую секцию принудительно. */
 @media (prefers-reduced-motion: reduce) {
-  .snap-container {
-    scroll-behavior: auto;
-    scroll-snap-type: y proximity;
+  html { scroll-behavior: auto; }
+}
+
+/* Без JS анимации не запустятся, поэтому всё, что они прячут до появления
+   на экране (data-reveal), показываем сразу, а заставку убираем.
+   !important нужен, чтобы перебить inline-стили Framer Motion. */
+@media (scripting: none) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
-  .snap-section {
-    scroll-snap-stop: normal;
+  [data-reveal="check"] {
+    background-color: #fff !important;
+    color: #101011 !important;
+  }
+
+  [data-intro] {
+    display: none !important;
+  }
+}
+
+/* FadeImage: прячем фото до загрузки только при включённом JS,
+   иначе без JS картинки остались бы невидимыми. */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .fade-image {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .fade-image[data-loaded] {
+    opacity: 1;
   }
 }

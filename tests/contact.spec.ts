@@ -7,12 +7,12 @@ for (const width of [390, 768, 1440, 1920]) {
     const section = page.locator("#contact");
 
     // Check heading
-    await expect(section.getByRole("heading", { level: 2 })).toContainText("заказать");
+    await expect(section.getByRole("heading", { level: 2 })).toContainText(/заказать/i);
     await expect(section.getByRole("heading", { level: 2 })).toContainText("автомобиль");
 
     // Check form fields
-    await expect(page.locator("label[for='car']")).toBeVisible();
-    await expect(page.locator("input#car")).toBeVisible();
+    await expect(section.getByLabel("Желаемый автомобиль")).toBeVisible();
+    await expect(page.locator("input#car")).toHaveAttribute("placeholder", "Желаемый автомобиль");
     await expect(page.locator("input#name")).toBeVisible();
     await expect(page.locator("input#budget")).toBeVisible();
     await expect(page.locator("input#phone")).toBeVisible();

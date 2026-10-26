@@ -1,32 +1,38 @@
 "use client";
 
-import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import Link from "next/link";
+import { useRef, useState } from "react";
+import { useInView, useReducedMotion } from "framer-motion";
+import { Reveal, RevealTitle, VIEWPORT } from "@/components/reveal/Reveal";
+import { useTypewriter } from "@/components/reveal/useTypewriter";
+import { WHATSAPP_URL } from "@/lib/site";
 import styles from "./Logistics.module.css";
+
+// Подсказка в поиске чередует текст и пример номера трека.
+const trackExamples = ["поиск по трекам...", "KM-2410-0587", "поиск по трекам...", "KM-2409-1342"] as const;
 
 export default function Logistics() {
   const reducedMotion = useReducedMotion();
   const [submitted, setSubmitted] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const formInView = useInView(formRef, VIEWPORT);
+  const placeholder = useTypewriter(trackExamples, formInView && !reducedMotion);
 
   return (
     <div className={styles.wrapper}>
       <footer className={styles.footer}>
-        <span>Политика конфиденциальности</span>
+        <Link href="/privacy" className={styles.privacy}>Политика конфиденциальности</Link>
         <span>© 2026 «kim motors»</span>
-        <a href="https://wa.me/996500668685" target="_blank" rel="noopener noreferrer">
+        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
           Написать в WhatsApp
         </a>
       </footer>
       <section id="logistics" aria-labelledby="logistics-title" className={styles.section}>
-        <motion.div
-          initial={false}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          style={{ y: reducedMotion ? 0 : 16 }}
-        >
-          <h2 id="logistics-title" className={styles.title}>логистика</h2>
-          <p className={styles.description}>Введите номер трека для поиска.</p>
+        <div>
+          <RevealTitle id="logistics-title" className={styles.title} lines={["логистика"]} />
+          <Reveal as="p" className={styles.description} delay={0.15}>Введите номер трека для поиска.</Reveal>
           <form
+            ref={formRef}
             className={styles.form}
             onSubmit={(event) => {
               event.preventDefault();
@@ -34,15 +40,15 @@ export default function Logistics() {
             }}
           >
             <div className={styles.field}>
-              <svg aria-hidden="true" viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
-                <circle cx="12" cy="6" r="5" />
-                <path d="M9 13h6a7 7 0 0 1 7 7v1a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-1a7 7 0 0 1 7-7Z" />
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+                <circle cx="10.5" cy="10.5" r="6.5" />
+                <path d="m15.5 15.5 5 5" />
               </svg>
               <input
                 aria-label="Номер трека"
                 name="track"
                 type="text"
-                placeholder="поиск по трекам..."
+                placeholder={placeholder}
                 required
                 pattern=".*\S.*"
                 title="Введите номер трека"
@@ -55,11 +61,11 @@ export default function Logistics() {
             {submitted && (
               <p>
                 Онлайн-поиск пока не подключён. Уточните статус доставки у{' '}
-                <a href="https://wa.me/996500668685" target="_blank" rel="noopener noreferrer">менеджера в WhatsApp</a>.
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">менеджера в WhatsApp</a>.
               </p>
             )}
           </div>
-        </motion.div>
+        </div>
       </section>
     </div>
   );

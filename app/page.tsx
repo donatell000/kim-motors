@@ -1,4 +1,4 @@
-import ScrollSnapContainer from "@/components/scroll-snap/ScrollSnapContainer";
+import MotionProvider from "@/components/motion/MotionProvider";
 import WelcomeIntro from "@/components/welcome/WelcomeIntro";
 import Hero from "@/components/hero/Hero";
 import Advantages from "@/components/advantages/Advantages";
@@ -13,19 +13,20 @@ import Logistics from "@/components/logistics/Logistics";
 export default function Home() {
   return (
     <WelcomeIntro>
-      <ScrollSnapContainer>
-        <Hero />
-        <Advantages />
-        <About />
-        <Platforms />
-
-        <Selection />
-        <Process />
-
-        <Clients />
-        <Contact />
+      <MotionProvider>
+        <main>
+          <Hero />
+          <Advantages />
+          <About />
+          <Platforms />
+          <Selection />
+          <Process />
+          <Clients />
+          <Contact />
+        </main>
+        {/* Внутри — футер и поиск по трекам; футер не должен быть в <main>. */}
         <Logistics />
-      </ScrollSnapContainer>
+      </MotionProvider>
     </WelcomeIntro>
   );
 }

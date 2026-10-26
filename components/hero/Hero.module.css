@@ -8,15 +8,24 @@
   padding: clamp(28px, 5.2vw, 100px);
   background: #101014;
   color: #fff;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
-.image {
+.backdrop {
+  position: absolute;
+  inset: 0;
   z-index: -2;
+  overflow: hidden;
+}
+
+.zoom { position: absolute; inset: 0; }
+
+.image {
   object-fit: cover;
   object-position: center 58%;
 }
+
+/* Цифры одной ширины, чтобы счётчик не дёргался. */
+.count { font-variant-numeric: tabular-nums; }
 
 .shade {
   position: absolute;
@@ -88,7 +97,6 @@
   text-transform: uppercase;
 }
 
-.title span { color: #ff0009; }
 .actions { display: grid; gap: 14px; }
 
 .primary,
@@ -146,8 +154,4 @@
 
 @media (max-width: 480px) {
   .actions { grid-template-columns: 1fr; gap: 10px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero { scroll-snap-stop: normal; }
 }

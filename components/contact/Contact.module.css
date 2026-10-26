@@ -1,222 +1,217 @@
+/* Размеры сняты с макета 1920×1080: 1vw = 19.2px, 1svh = 10.8px. */
 .section {
   position: relative;
   isolation: isolate;
+  overflow: hidden;
   min-height: 100svh;
-  padding: 8svh clamp(20px, 5.2vw, 100px) 4svh;
-  background: #0e0d12;
-  color: #fff;
-  scroll-snap-align: start;
-  display: flex;
-  flex-direction: column;
-}
-
-.inner {
-  flex: 1;
+  box-sizing: border-box;
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-  gap: 32px 6%;
-  max-width: 1720px;
-  margin: 0 auto;
-  width: 100%;
+  grid-template-columns: minmax(0, 1fr) clamp(360px, 30vw, 575px);
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "title form"
+    "socials form";
+  column-gap: 4vw;
+  padding: clamp(48px, min(8.9vw, 15.7svh), 170px) clamp(20px, 9.8vw, 188px) clamp(40px, min(7.8vw, 13.9svh), 150px) clamp(20px, 5.7vw, 109px);
+  background: #141414;
+  color: #fff;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  min-width: 0;
+/* Сама картинка фона нарисована с рамкой — увеличиваем её, чтобы рамка ушла за края. */
+.background {
+  z-index: -2;
+  object-fit: cover;
+  transform: scale(1.1);
 }
 
 .title {
-  margin: 0 0 48px;
-  font-family: Benzin-Bold, Arial Black, sans-serif;
-  font-size: clamp(30px, 4vw, 77px);
+  grid-area: title;
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: Benzin-Bold, "Arial Black", Arial, sans-serif;
+  font-size: clamp(32px, min(4.06vw, 7.2svh), 78px);
   font-weight: 900;
-  line-height: 0.9;
+  line-height: 0.94;
   letter-spacing: -0.04em;
   text-transform: uppercase;
 }
 
-.title span {
-  color: #fff;
+/* Машина обрезана левым краем экрана, перед стоит под формой слева. */
+.car {
+  position: absolute;
+  z-index: -1;
+  left: -29.5%;
+  bottom: -2.2vw;
+  width: 85.6%;
+  aspect-ratio: 3 / 2;
+  pointer-events: none;
 }
 
+.car img { object-fit: contain; }
+
 .form {
-  display: grid;
-  gap: 24px;
-  max-width: 500px;
-  width: 100%;
+  grid-area: form;
   align-self: start;
+  display: grid;
+  gap: clamp(8px, 0.52vw, 10px);
+  padding: clamp(20px, 2vw, 38px);
+  background: #fff;
+  border-radius: 11px;
+  color: #181818;
 }
 
 .field {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  position: relative;
+  color: #6f6f6f;
 }
 
-.field label {
-  font-size: 16px;
-  font-weight: 500;
-  opacity: 0.8;
+.field svg {
+  position: absolute;
+  top: 50%;
+  left: clamp(18px, 2.2vw, 42px);
+  width: clamp(20px, 1.4vw, 26px);
+  height: clamp(20px, 1.4vw, 26px);
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 .field input {
-  height: 64px;
-  padding: 0 16px;
-  background: #fff;
-  border: 1px solid #fff;
-  border-radius: 12px;
+  display: block;
+  box-sizing: border-box;
   width: 100%;
-  min-width: 0;
-  color: #101011;
-  font-size: 18px;
+  height: clamp(60px, min(6.4vw, 11.4svh), 123px);
+  padding: 0 16px 0 clamp(52px, 4.5vw, 87px);
+  background: #f1f1f1;
+  border: 2px solid transparent;
+  border-radius: 9px;
+  color: #181818;
+  font: inherit;
+  font-size: clamp(16px, 1.15vw, 22px);
   transition: border-color 0.2s;
 }
 
-.field input:focus {
-  outline: none;
-  border-color: #ff0009;
-  background: #fff;
-}
+.field input::placeholder { color: #6f6f6f; opacity: 1; }
+.field input:focus { outline: none; border-color: #e8322a; }
 
 .submit {
-  margin-top: 12px;
-  height: 72px;
-  background: #ff0009;
+  height: clamp(60px, min(6.4vw, 11.4svh), 123px);
+  margin-top: clamp(12px, 1.2vw, 22px);
+  background: #e8322a;
   color: #fff;
   border: none;
-  border-radius: 12px;
-  font-size: 24px;
-  font-weight: 600;
+  border-radius: 9px;
+  font: inherit;
+  font-size: clamp(17px, 1.15vw, 22px);
   cursor: pointer;
-  transition: transform 0.2s, filter 0.2s;
-  box-shadow: 0 5px #650000;
+  transition: filter 0.2s;
 }
 
-.submit:hover {
-  filter: brightness(1.1);
-}
-
-.submit:active {
-  transform: translateY(2px);
-  box-shadow: 0 3px #650000;
-}
-
-.info {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-top: 24px;
-}
+.submit:hover { filter: brightness(1.08); }
+.submit:focus-visible { outline: 3px solid #181818; outline-offset: 3px; }
 
 .socials {
+  grid-area: socials;
+  align-self: end;
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
+  align-items: flex-start;
+  gap: 16px clamp(20px, 1.8vw, 34px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.socialLink {
-  font-size: clamp(16px, 1.4vw, 24px);
-  font-weight: 300;
+.socials li {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(10px, 0.9vw, 16px);
+}
+
+.socialIcon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: clamp(32px, 2.1vw, 40px);
+  height: clamp(32px, 2.1vw, 40px);
+  border-radius: 50%;
+  background: #c9c9c9;
+  color: #3a3a3a;
+}
+
+.socialIcon svg { width: 58%; height: 58%; }
+
+.socialText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 2px;
+}
+
+.socialText a {
   color: #fff;
-  text-decoration: none;
+  font-size: clamp(16px, 1.2vw, 23px);
+  line-height: 1.2;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
   transition: color 0.2s;
 }
 
-.socialLink:hover {
-  color: #ff0009;
+.socialText a:hover { color: #e8322a; }
+.socialText a:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+
+.socialText small {
+  color: #bdbdbd;
+  font-size: clamp(9px, 0.6vw, 11px);
+  text-transform: uppercase;
 }
 
-.contacts {
-  margin-top: 48px;
+.consent {
+  margin: 2px 0 0;
+  color: #666;
+  font-size: clamp(11px, 0.68vw, 13px);
+  line-height: 1.35;
+  text-align: center;
 }
 
-.phone {
-  font-size: clamp(32px, 3.5vw, 60px);
-  font-weight: 700;
-  margin-bottom: 12px;
+.consent a { color: inherit; text-underline-offset: 2px; }
+.consent a:hover { color: #181818; }
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
-.tagline {
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  opacity: 0.6;
-}
-
-.footer {
-  margin-top: auto;
-  padding-top: 48px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-  opacity: 0.4;
-}
-
-.link {
-  color: #fff;
-  text-decoration: none;
-}
-
-.link:hover {
-  text-decoration: underline;
-}
-
-.car { position: relative; flex: 1; min-height: 380px; margin-left: calc(-1 * clamp(20px, 5.2vw, 100px)); mix-blend-mode: lighten; }
-.car img { object-fit: cover; object-position: center; }
-.hint { margin: 0; color: #ccc; font-size: 14px; line-height: 1.4; }
-.socialLink:focus-visible, .submit:focus-visible { outline: 2px solid #fff; outline-offset: 6px; }
-
+/* Планшет и телефон: заголовок → машина → форма → контакты. */
 @media (max-width: 900px) {
-  .inner {
-    grid-template-columns: 1fr;
-    gap: 64px;
+  .section {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-template-areas: "title" "car" "form" "socials";
+    row-gap: 32px;
+    padding: 64px 20px 48px;
   }
 
-  .form { max-width: none; }
-  .car { min-height: 0; aspect-ratio: 3 / 2; margin-inline: -20px; }
-
-  .info {
-    padding-top: 0;
+  .car {
+    grid-area: car;
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: 160%;
+    margin: -28% 0 -20% -62%;
   }
+
+  .form { max-width: 560px; width: 100%; box-sizing: border-box; justify-self: center; }
+  .socials { align-self: start; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .submit, .socialLink, .field input { transition: none; }
-}
-
-@media (max-width: 640px) {
-  .section {
-    padding-block: 64px 32px;
-  }
-
-  .title {
-    margin-bottom: 32px;
-  }
-
-  .form {
-    max-width: none;
-  }
-
-  .submit {
-    height: 64px;
-    font-size: 20px;
-  }
-
-  .phone {
-    font-size: 28px;
-  }
-
-  .tagline {
-    font-size: 14px;
-  }
-
-  .footer {
-    flex-direction: column;
-    gap: 16px;
-    align-items: flex-start;
-  }
+  .submit, .field input, .socialText a { transition: none; }
 }

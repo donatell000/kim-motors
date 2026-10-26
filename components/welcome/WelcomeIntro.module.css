@@ -1,5 +1,5 @@
 .root {
-  --intro-duration: 1800ms;
+  --intro-fade: 450ms;
 }
 
 .overlay {
@@ -14,7 +14,13 @@
   background: #101213;
   color: #f0f1ec;
   pointer-events: none;
-  animation: exit var(--intro-duration) ease forwards;
+  /* Запасной вариант без JS: заставка сама уходит через 2,4 с. */
+  animation: exit var(--intro-fade) ease 2.4s forwards;
+}
+
+/* JS добавляет .done, когда загрузилось фото первого экрана. */
+.overlay.done {
+  animation: exit-now var(--intro-fade) ease forwards;
 }
 
 .caption {
@@ -69,10 +75,6 @@
   transform-origin: left;
 }
 
-.content {
-  animation: reveal var(--intro-duration) ease both;
-}
-
 
 @keyframes enter {
   from { opacity: 0; transform: translateY(8px); }
@@ -84,15 +86,15 @@
   to { opacity: 1; transform: scaleX(1); }
 }
 
+/* Два одинаковых keyframes: смена имени перезапускает анимацию с нуля. */
 @keyframes exit {
-  0%, 72% { opacity: 1; visibility: visible; }
-  100% { opacity: 0; visibility: hidden; }
+  from { opacity: 1; visibility: visible; }
+  to { opacity: 0; visibility: hidden; }
 }
 
-@keyframes reveal {
-  0%, 72% { opacity: 0; visibility: hidden; }
-  73% { opacity: 0; visibility: visible; }
-  100% { opacity: 1; visibility: visible; }
+@keyframes exit-now {
+  from { opacity: 1; visibility: visible; }
+  to { opacity: 0; visibility: hidden; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -102,8 +104,7 @@
 
   .overlay,
   .wordmark,
-  .lights > span,
-  .content {
+  .lights > span {
     animation: none;
   }
 }

@@ -1,0 +1,12 @@
+/* Маска строки. Небольшой запас сверху и снизу, чтобы не обрезать
+   «й», «у», «р» и знаки препинания; отрицательный margin его компенсирует. */
+.mask {
+  display: block;
+  overflow: clip;
+  padding-block: 0.08em 0.12em;
+  margin-block: -0.08em -0.12em;
+}
+
+.line {
+  display: block;
+}

@@ -3,7 +3,6 @@
   background: #0e0d12;
   color: #fff;
   overflow-x: clip;
-  scroll-snap-align: start;
 }
 
 .inner { position: relative; display: grid; grid-template-columns: 1.1fr 1fr; max-width: 1720px; margin: 0 auto; }
@@ -33,14 +32,18 @@
   .section { padding: 56px max(20px, env(safe-area-inset-right)) 64px max(20px, env(safe-area-inset-left)); }
   .inner { grid-template-columns: minmax(0, 1fr); }
   .copy { display: contents; }
-  .audi { top: 90px; width: 100%; }
+  /* На телефоне чёрная Audi спорит с плашкой и портретом — убираем. */
+  .audi { display: none; }
   .title, .experience, .mission { position: relative; z-index: 2; }
   .title { grid-row: 1; font-size: clamp(48px, 11vw, 88px); margin-bottom: 24px; }
   .experience { grid-row: 2; max-width: none; padding: 24px; margin: 0; font-size: clamp(22px, 4vw, 30px); }
   .portrait { grid-row: 3; width: 100%; height: clamp(340px, 85vw, 540px); margin-top: 24px; }
   .founder { width: 100%; max-width: 450px; left: 50%; right: auto; transform: translateX(-50%); object-fit: cover; }
-  .car { width: 100%; right: 0; bottom: 12px; }
-  .caption { bottom: 16px; padding: 12px 20px; }
+  .car { width: 100%; right: 0; bottom: 12%; mask-image: linear-gradient(to bottom, #000 45%, transparent 90%); }
+  /* Мягкий свет за портретом и затемнение снизу, чтобы фото растворялось в фоне. */
+  .portrait::before { content: ""; position: absolute; inset: 10% -20px 0; background: radial-gradient(ellipse 60% 55% at 50% 45%, #2b2b33, transparent 70%); pointer-events: none; }
+  .portrait::after { content: ""; position: absolute; inset: auto -20px 0; height: 38%; background: linear-gradient(to bottom, transparent, #0e0d12 85%); pointer-events: none; }
+  .caption { z-index: 1; bottom: 16px; padding: 12px 20px; background: #0e0d12cc; border: 1px solid #ffffff1a; backdrop-filter: blur(6px); }
   .caption strong { font-size: 18px; }
   .caption span { font-size: 16px; }
   .mission { grid-row: 4; padding: 24px; font-size: 22px; }
@@ -66,8 +69,4 @@
   .story { margin-top: 3svh; max-width: 780px; }
   .story p { font-size: min(2.1vw, 2.8svh); }
   .story figcaption { margin-top: 1svh; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .inner { transform: none !important; }
 }

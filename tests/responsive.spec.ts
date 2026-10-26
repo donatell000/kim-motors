@@ -55,7 +55,6 @@ for (const [width, height] of [[320, 568], [360, 640], [375, 667], [390, 844], [
     await page.locator("#about").screenshot({ path: `test-results/about-${width}.png` });
     await page.evaluate(() => {
       window.scrollTo(0, 0);
-      document.querySelector(".snap-container")?.scrollTo({ top: 0, behavior: "instant" });
     });
     await page.locator("#hero").screenshot({ path: `test-results/hero-${width}.png` });
     expect(errors).toEqual([]);

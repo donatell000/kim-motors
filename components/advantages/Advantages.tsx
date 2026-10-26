@@ -1,4 +1,7 @@
+import { Fragment } from "react";
 import Image from "next/image";
+import FadeImage from "@/components/fade-image/FadeImage";
+import { Accent, Reveal, RevealTitle } from "@/components/reveal/Reveal";
 import styles from "./Advantages.module.css";
 
 const advantages = [
@@ -13,12 +16,14 @@ export default function Advantages() {
   return (
     <section id="advantages" className={styles.section} aria-labelledby="advantages-title">
       <div className={styles.inner}>
-        <h2 id="advantages-title" className={styles.title}>
-          Почему <span>выбирают</span> нас
-        </h2>
+        <RevealTitle
+          id="advantages-title"
+          className={styles.title}
+          lines={[<Fragment key="line">Почему <Accent>выбирают</Accent> нас</Fragment>]}
+        />
         <div className={styles.scene}>
-          <Image
-            src="/advantages-car.png"
+          <FadeImage
+            src="/advantages-car.webp"
             alt="Чёрный Mercedes-Benz на подиуме"
             width={2826}
             height={1235}
@@ -26,11 +31,11 @@ export default function Advantages() {
             className={styles.car}
           />
           <ul className={styles.list}>
-            {advantages.map(({ id, text }) => (
-              <li key={id} className={`${styles.item} ${styles[id]}`}>
+            {advantages.map(({ id, text }, index) => (
+              <Reveal as="li" key={id} className={`${styles.item} ${styles[id]}`} delay={0.2 + index * 0.08}>
                 <Image src={`/advantage-${id}.svg`} alt="" width={75} height={75} />
                 <p>{text}</p>
-              </li>
+              </Reveal>
             ))}
           </ul>
         </div>

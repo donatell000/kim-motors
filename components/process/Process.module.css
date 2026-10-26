@@ -1,4 +1,4 @@
-.section { position: relative; padding: clamp(56px, 6.4vw, 122px) clamp(20px, 5.2vw, 100px) clamp(64px, 8vw, 154px); margin: 12px 7px; border-radius: clamp(24px, 2.5vw, 48px); background: #fff; color: #181818; scroll-snap-align: start; }
+.section { position: relative; padding: clamp(56px, 6.4vw, 122px) clamp(20px, 5.2vw, 100px) clamp(64px, 8vw, 154px); margin: 12px 7px; border-radius: clamp(24px, 2.5vw, 48px); background: #fff; color: #181818; }
 .inner { max-width: 1720px; margin: 0 auto; }
 .title { margin: 0 0 clamp(40px, 4vw, 76px); text-align: center; font-family: Arial Black, Arial, Helvetica, sans-serif; font-size: clamp(30px, 4vw, 77px); font-weight: 900; line-height: 1; letter-spacing: -0.045em; text-transform: uppercase; }
 .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
@@ -13,10 +13,13 @@
 .consultation { inset: 54% 17% -35%; filter: grayscale(1); }
 .contract { inset: 45% -8% -12% 5%; }
 .customs { inset: 49% -8% -8%; }
-.options img { position: absolute; width: 57%; height: auto; border-radius: 5px; }
-.options .bmw { right: -5%; top: 0; transform: rotate(-20deg); }
-.options .mercedes { left: -3%; top: 15%; transform: rotate(8deg); }
-.options .lexus { right: 12%; top: 56%; width: 44%; transform: rotate(-8deg); }
+.fan { position: absolute; inset: 0; }
+/* Поворот фото задаётся в Process.tsx (анимация веера), здесь только места. */
+.photo { position: absolute; width: 57%; }
+.photo img { display: block; width: 100%; height: auto; border-radius: 5px; }
+.options .bmw { right: -5%; top: 0; }
+.options .mercedes { left: -3%; top: 15%; }
+.options .lexus { right: 12%; top: 56%; width: 44%; }
 
 @media (max-width: 1100px) {
   .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }

@@ -1,7 +1,5 @@
-"use client";
-
-import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import FadeImage from "@/components/fade-image/FadeImage";
+import { Reveal, RevealTitle } from "@/components/reveal/Reveal";
 import styles from "./Clients.module.css";
 
 const photos = [
@@ -12,26 +10,16 @@ const photos = [
 ];
 
 export default function Clients() {
-  const reducedMotion = useReducedMotion();
-
   return (
     <section id="clients" aria-labelledby="clients-title" className={styles.section}>
-      <motion.div
-        initial={false}
-        whileInView={{ y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
-        style={{ y: reducedMotion ? 0 : 20 }}
-        transition={{ duration: reducedMotion ? 0 : 0.6 }}
-      >
-        <h2 id="clients-title" className={styles.title}>Наши клиенты</h2>
-        <ul className={styles.gallery} tabIndex={0} aria-label="Фотографии клиентов — прокручиваемая галерея">
-          {photos.map(({ src, alt }) => (
-            <li className={styles.card} key={src}>
-              <Image src={src} alt={alt} fill sizes="(max-width: 540px) 80vw, (max-width: 900px) 44vw, 24vw" />
-            </li>
-          ))}
-        </ul>
-      </motion.div>
+      <RevealTitle id="clients-title" className={styles.title} lines={["Наши клиенты"]} />
+      <ul className={styles.gallery} tabIndex={0} aria-label="Фотографии клиентов — прокручиваемая галерея">
+        {photos.map(({ src, alt }, index) => (
+          <Reveal as="li" className={styles.card} key={src} delay={0.15 + index * 0.08}>
+            <FadeImage src={src} alt={alt} fill sizes="(max-width: 540px) 80vw, (max-width: 900px) 44vw, 24vw" />
+          </Reveal>
+        ))}
+      </ul>
     </section>
   );
 }

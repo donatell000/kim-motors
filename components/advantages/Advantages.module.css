@@ -5,8 +5,6 @@
   padding: clamp(48px, 6vw, 110px) clamp(20px, 5.2vw, 100px);
   background: radial-gradient(ellipse at 0 0, #272729 0, transparent 32%), #111;
   color: #fff;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 .inner { width: 100%; max-width: 1720px; margin: 0 auto; }
@@ -21,7 +19,6 @@
   text-transform: uppercase;
 }
 
-.title span { color: #ff0009; }
 .scene { position: relative; min-height: 650px; height: 42vw; max-height: 810px; }
 .car { position: absolute; bottom: 0; right: 0; width: 83%; height: auto; }
 .list { margin: 0; padding: 0; list-style: none; }
@@ -67,8 +64,4 @@
   .car { width: auto; max-width: 83%; height: 85%; object-fit: contain; object-position: right bottom; }
   .item { font-size: min(1.65vw, 2.8svh); gap: min(1vw, 1.8svh); }
   .item img { width: min(4vw, 6.5svh); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .section { scroll-snap-stop: normal; }
 }

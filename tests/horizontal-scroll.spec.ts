@@ -6,7 +6,7 @@ for (const [width, height] of [[390, 844], [844, 390], [1440, 900]]) {
     await page.goto("http://localhost:3000");
     await expect(page.locator("h1")).toBeVisible();
     const scrolling = await page.evaluate(() => {
-      return [...document.querySelectorAll<HTMLElement>("html, body, .snap-container, #about")].flatMap(element => {
+      return [...document.querySelectorAll<HTMLElement>("html, body, #about")].flatMap(element => {
         if (element.scrollWidth <= element.clientWidth + 1) return [];
         element.scrollLeft = 100;
         const left = element.scrollLeft;
